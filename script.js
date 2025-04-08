@@ -334,18 +334,25 @@ async function signUp(email, password) {
   }
 }
 
-async function signIn(email, password) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  });
+export async function signIn(email, password) {
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) {
     alert('Login error: ' + error.message);
   } else {
     alert('Logged in!');
-    console.log(data);
+    window.location.href = 'index.html'; // Redirect to Pomodoro page
   }
 }
+
+supabase.auth.getUser().then(({ data }) => {
+  if (data?.user?.email) {
+    const msg = document.createElement('p');
+    msg.textContent = `👋 Welcome, ${data.user.email}`;
+    document.body.prepend(msg);
+  }
+});
+
+
 
 async function signOut() {
   await supabase.auth.signOut();
@@ -361,6 +368,7 @@ async function loginWithGoogle() {
     alert('Google login failed: ' + error.message);
   }
 }
+
 
 
 

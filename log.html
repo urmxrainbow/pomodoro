@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Firebase Auth UI</title>
+  <link rel="stylesheet" href="login.css" />
+
+<div class="auth">
+    <input type="email" id="auth-email" placeholder="Email">
+    <input type="password" id="auth-password" placeholder="Password">
+    <button onclick="signUp(document.getElementById('auth-email').value, document.getElementById('auth-password').value)">Sign Up</button>
+    <button onclick="signIn(document.getElementById('auth-email').value, document.getElementById('auth-password').value)">Log In</button>
+    <button onclick="loginWithGoogle()">Log in with Google</button>
+
+    <button onclick="signOut()">Log Out</button>
+  </div>
+
+</div>
+
+<script type="module" src="log.js"></script>
+
+</body>
+</html>
+  

@@ -311,63 +311,12 @@ async function saveSession(type = 'focus') {
   }
 }
 
-
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-const supabase = createClient(
-  'https://iagqrjlmjgyoxsmuobqh.supabase.co',           // your Supabase URL
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlhZ3Fyamxtamd5b3hzbXVvYnFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwOTY0MjQsImV4cCI6MjA1OTY3MjQyNH0.psvtA5wAt1IPKfK8Td744D24-oDCvR4n3QXk9iaXtcI'                             // your public anon key
-);
-
-
-await supabase.auth.signInWithOAuth({ provider: 'google' });
-
-async function signUp(email, password) {
-  const { user, error } = await supabase.auth.signUp({
-    email,
-    password
-  });
-  if (error) {
-    alert('Sign up error: ' + error.message);
-  } else {
-    alert('Check your email to confirm sign up!');
-  }
-}
-
-export async function signIn(email, password) {
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) {
-    alert('Login error: ' + error.message);
-  } else {
-    alert('Logged in!');
-    window.location.href = 'index.html'; // Redirect to Pomodoro page
-  }
-}
-
 supabase.auth.getUser().then(({ data }) => {
   if (data?.user?.email) {
-    const msg = document.createElement('p');
-    msg.textContent = `👋 Welcome, ${data.user.email}`;
-    document.body.prepend(msg);
+    document.body.insertAdjacentHTML('afterbegin', `<p>👋 Welcome, ${data.user.email}</p>`);
   }
 });
 
-
-
-async function signOut() {
-  await supabase.auth.signOut();
-  alert('Logged out');
-}
-
-async function loginWithGoogle() {
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-  });
-
-  if (error) {
-    alert('Google login failed: ' + error.message);
-  }
-}
 
 
 
